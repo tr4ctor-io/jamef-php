@@ -17,22 +17,50 @@ class Jamef
     const JAMEF_API_URI = 'JAMEF_API_URI';
 
     /**
-     * The Environment variable name or argument for API Key.
+     * The Environment variable name or argument for API Username.
      *
      * @var string
      */
-    const JAMEF_API_KEY = 'JAMEF_API_KEY';
+    const JAMEF_API_USERNAME = 'JAMEF_API_USERNAME';
 
     /**
-     * API KEY to be set on instances
+     * The Environment variable name or argument for API Password.
      *
      * @var string
      */
-    private static $jamef_api_key;
+    const JAMEF_API_PASSWORD = 'JAMEF_API_PASSWORD';
+
+    /**
+     * The Environment variable name or argument for API Password.
+     *
+     * @var string
+     */
+    const JAMEF_API_TOKEN = 'JAMEF_API_TOKEN';
+
+    /**
+     * API USERNAME to be set on instances
+     *
+     * @var string
+     */
+    private static $jamef_api_username;
+
+    /**
+     * API PASSWORD to be set on instances
+     *
+     * @var string
+     */
+    private static $jamef_api_password;
+
+    /**
+     * API TOKEN to be set on instances
+     *
+     * @var string
+     */
+    private static $jamef_api_token;
 
     /**
      * URI to be set on instances
-     * Ex.: https://sandbox-app.jamef.com.br/api/v1/
+     * Ex.: https://api-qa.jamef.com.br/
      *
      * @var string;
      */
@@ -60,14 +88,38 @@ class Jamef
     }
 
     /**
-     * Set API KEY
+     * Set API USERNAME
      *
-     * @param $jamef_api_key
+     * @param $jamef_api_username
      */
-    public static function setApiKey($jamef_api_key)
+    public static function setApiUsername($jamef_api_username)
     {
-        if (null === self::$jamef_api_key) {
-            self::$jamef_api_key = $jamef_api_key;
+        if (null === self::$jamef_api_username) {
+            self::$jamef_api_username = $jamef_api_username;
+        }
+    }
+
+    /**
+     * Set API PASSWORD
+     *
+     * @param $jamef_api_password
+     */
+    public static function setApiPassword($jamef_api_password)
+    {
+        if (null === self::$jamef_api_password) {
+            self::$jamef_api_password = $jamef_api_password;
+        }
+    }
+
+    /**
+     * Set API TOKEN
+     *
+     * @param $jamef_api_password
+     */
+    public static function setApiToken($jamef_api_token)
+    {
+        if (null === self::$jamef_api_token) {
+            self::$jamef_api_token = $jamef_api_token;
         }
     }
 
@@ -98,21 +150,49 @@ class Jamef
             return getenv(static::JAMEF_API_URI);
         }
 
-        return 'https://app.jamef.com.br/api/v1/';
+        return 'https://api.jamef.com.br/';
     }
 
     /**
-     * Get Jamef API Key from environment.
+     * Get Jamef API Username from environment.
      *
      * @return string
      */
-    public static function getApiKey()
+    public static function getApiUsername()
     {
-        if (null !== self::$jamef_api_key) {
-            return self::$jamef_api_key;
+        if (null !== self::$jamef_api_username) {
+            return self::$jamef_api_username;
         }
 
-        return getenv(static::JAMEF_API_KEY);
+        return getenv(static::JAMEF_API_USERNAME);
+    }
+
+    /**
+     * Get Jamef API Password from environment.
+     *
+     * @return string
+     */
+    public static function getApiPassword()
+    {
+        if (null !== self::$jamef_api_password) {
+            return self::$jamef_api_password;
+        }
+
+        return getenv(static::JAMEF_API_PASSWORD);
+    }
+
+    /**
+     * Get Jamef API Token from environment.
+     *
+     * @return string
+     */
+    public static function getApiToken()
+    {
+        if (null !== self::$jamef_api_token) {
+            return self::$jamef_api_token;
+        }
+
+        return getenv(static::JAMEF_API_TOKEN);
     }
 
     /**

@@ -21,8 +21,16 @@ abstract class Resource
      */
     public function __construct($arguments = [])
     {
-        if (key_exists(Jamef::JAMEF_API_KEY, $arguments)) {
-            Jamef::setApiKey($arguments[Jamef::JAMEF_API_KEY]);
+        if (key_exists(Jamef::JAMEF_API_USERNAME, $arguments)) {
+            Jamef::setApiUsername($arguments[Jamef::JAMEF_API_USERNAME]);
+        }
+
+        if (key_exists(Jamef::JAMEF_API_PASSWORD, $arguments)) {
+            Jamef::setApiPassword($arguments[Jamef::JAMEF_API_PASSWORD]);
+        }
+
+        if (key_exists(Jamef::JAMEF_API_TOKEN, $arguments)) {
+            Jamef::setApiToken($arguments[Jamef::JAMEF_API_TOKEN]);
         }
 
         if (key_exists(Jamef::JAMEF_API_URI, $arguments)) {

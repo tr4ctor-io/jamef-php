@@ -22,16 +22,16 @@ class Client extends Guzzle
         $config = array_merge(
             [
                 'base_uri' => Jamef::getApiUri(),
-                'auth' => [Jamef::getApiKey(), '', 'BASIC'],
                 'headers' => [
                     'Content-Type' => 'application/json',
                     'User-Agent' => trim('Tr4ctor\Jamef-PHP/' . Jamef::$sdkVersion . "; {$host}"),
+                    'Authorization' => 'Bearer '.Jamef::getApiToken()
                 ],
-                'verify' => Jamef::getCertPath(),
+                // 'verify' => Jamef::getCertPath(),
                 'timeout' => Jamef::getApiTimeOut(),
-                'curl.options' => [
-                    'CURLOPT_SSLVERSION' => 'CURL_SSLVERSION_TLSv1_2',
-                ]
+                // 'curl.options' => [
+                //     'CURLOPT_SSLVERSION' => 'CURL_SSLVERSION_TLSv1_2',
+                // ]
             ],
             $config
         );
