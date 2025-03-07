@@ -26,8 +26,8 @@ class CalculoFrete extends Resource
      *
      * @return mixed
      * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \Vindi\Exceptions\RateLimitException
-     * @throws \Vindi\Exceptions\RequestException
+     * @throws \Tr4ctor\Jamef\Exceptions\RateLimitException
+     * @throws \Tr4ctor\Jamef\Exceptions\RequestException
      */
     public function cotacao(array $form_params = [])
     {

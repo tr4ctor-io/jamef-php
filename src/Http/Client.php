@@ -27,11 +27,7 @@ class Client extends Guzzle
                     'User-Agent' => trim('Tr4ctor\Jamef-PHP/' . Jamef::$sdkVersion . "; {$host}"),
                     'Authorization' => 'Bearer '.Jamef::getApiToken()
                 ],
-                // 'verify' => Jamef::getCertPath(),
                 'timeout' => Jamef::getApiTimeOut(),
-                // 'curl.options' => [
-                //     'CURLOPT_SSLVERSION' => 'CURL_SSLVERSION_TLSv1_2',
-                // ]
             ],
             $config
         );

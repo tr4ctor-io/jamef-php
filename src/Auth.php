@@ -26,8 +26,8 @@ class Auth extends Resource
      *
      * @return mixed
      * @throws \GuzzleHttp\Exception\GuzzleException
-     * @throws \Vindi\Exceptions\RateLimitException
-     * @throws \Vindi\Exceptions\RequestException
+     * @throws \Tr4ctor\Jamef\Exceptions\RateLimitException
+     * @throws \Tr4ctor\Jamef\Exceptions\RequestException
      */
     public function login(array $form_params = [])
     {
