@@ -159,7 +159,7 @@ Todas as informações sobre cada release podem ser consultadas em [CHANGELOG.md
 - [Todos os Contribuidores][link-contributors]
 
 ## Licença
-GNU GPLv3. Por favor, veja o [Arquivo de Licença](license.txt) para mais informações.
+GNU GPLv3. Por favor, veja o [Arquivo de Licença](LICENSE) para mais informações.
 
 [badge-version]: https://img.shields.io/packagist/v/tr4ctor-io/jamef-php.svg
 [badge-license]: https://img.shields.io/badge/license-GPLv3-blue.svg
