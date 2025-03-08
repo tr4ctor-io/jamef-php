@@ -50,10 +50,23 @@ class RequestException extends Exception
         $this->parameters = [];
         $this->messages   = [];
 
+        if (!empty($errors['mensagem'])) {
+            array_push($this->messages, $errors['mensagem']);
+        }
+        if (!empty($errors['erros'])) {
+            $errors = $errors['erros'];
+        }
         foreach ($errors as $error) {
-            $this->ids[] = !empty($error->id) ? $error->id : null;
-            $this->parameters[] = !empty($error->parameter) ? $error->parameter : null;
-            $this->messages[] = !empty($error->message) ? $error->message : $error;
+            if (!empty($error->detalhes)) {
+                $this->messages[] = $error->detalhes;
+            } else {
+                $this->ids[] = !empty($error->id) ? $error->id : null;
+                $this->parameters[] = !empty($error->parameter) ? $error->parameter : null;
+                $this->messages[] = !empty($error->message) ? $error->message : $error;
+            }
+            if (!empty($error->componenteFalho)) {
+                $this->messages[] = $error->componenteFalho;
+            }
         }
 
         $this->message = trim(join('. ', $this->messages));
