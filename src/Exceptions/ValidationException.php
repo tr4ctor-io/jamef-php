@@ -1,12 +1,39 @@
 <?php namespace Tr4ctor\Jamef\Exceptions;
 
+use Exception;
+
 /**
  * Class ValidationException
  *
  * @package Jamef\Exceptions
  */
-class ValidationException extends RequestException
+class ValidationException extends Exception
 {
+    /**
+     * @var mixed
+     */
+    protected $errors;
+
+    /**
+     * @var array
+     */
+    protected $ids;
+
+    /**
+     * @var array
+     */
+    protected $parameters;
+
+    /**
+     * @var array
+     */
+    protected $messages;
+
+    /**
+     * @var array
+     **/
+    private $lastOptions;
+
     /**
      * ValidationException constructor.
      *
@@ -15,8 +42,74 @@ class ValidationException extends RequestException
      */
     public function __construct($status, $errors, array $lastOptions = [])
     {
-        parent::__construct($status, $errors, $lastOptions);
+        $this->lastOptions = $lastOptions;
+        $this->errors      = $errors;
+        $this->code        = $status;
 
-        $this->message     = "Erros de validação foram encontrados!";
+        $this->ids        = [];
+        $this->parameters = [];
+        $this->messages   = ['Erro ao validar os dados da requisição'];
+
+        if (!empty($errors['mensagem'])) {
+            array_push($this->messages, $errors['mensagem']);
+        }
+        if (!empty($errors['erros'])) {
+            $errors = $errors['erros'];
+        }
+        foreach ($errors as $error) {
+            if (!empty($error->detalhes)) {
+                $this->messages[] = $error->detalhes;
+            } else {
+                $this->ids[] = !empty($error->id) ? $error->id : null;
+                $this->parameters[] = !empty($error->parameter) ? $error->parameter : null;
+                $this->messages[] = !empty($error->message) ? $error->message : $error;
+            }
+            if (!empty($error->componenteFalho)) {
+                $this->messages[] = $error->componenteFalho;
+            }
+        }
+
+        $this->message = trim(join('. ', $this->messages));
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getErrors()
+    {
+        return $this->errors;
+    }
+
+    /**
+     * @return array
+     */
+    public function getIds()
+    {
+        return $this->ids;
+    }
+
+    /**
+     * @return array
+     */
+    public function getParameters()
+    {
+        return $this->parameters;
+    }
+
+    /**
+     * @return array
+     */
+    public function getMessages()
+    {
+        return $this->messages;
+    }
+
+    /**
+     * Return the last request body
+     * @return string
+     **/
+    public function getRequestBody()
+    {
+        return json_encode($this->lastOptions['json']);
     }
 }

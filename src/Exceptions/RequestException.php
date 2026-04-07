@@ -35,7 +35,7 @@ class RequestException extends Exception
     private $lastOptions;
 
     /**
-     * ValidationException constructor.
+     * RequestException constructor.
      *
      * @param int   $status
      * @param mixed $errors
